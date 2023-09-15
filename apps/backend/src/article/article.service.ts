@@ -158,15 +158,16 @@ export class ArticleService {
     );
     const article = new Article(user!, dto.title, dto.description, dto.body);
     article.tagList.push(...dto.tagList);
-    for(let i = 0; i < dto.tagList.length; i++){
-      const count=await this.tagRepository.count({'tag': dto.tagList[i]});
-      if(count == 0){
-      let t = new Tag();
-      t.tag = dto.tagList[i];
-      this.tagRepository.create(t);
+    article.coAuthors.push(...dto.coAuthors);
+    for (let i = 0; i < dto.tagList.length; i++) {
+      const count = await this.tagRepository.count({ tag: dto.tagList[i] });
+      if (count == 0) {
+        let t = new Tag();
+        t.tag = dto.tagList[i];
+        this.tagRepository.create(t);
+      }
     }
-    }
-    
+
     user?.articles.add(article);
     await this.em.flush();
 

@@ -23,6 +23,12 @@
       <div class="info">{{ article.favoritesCount }}</div>
     </button>
   </div>
+  <span>Co-Authors</span>
+  <ul class="tag-list">
+    <li class="tag-default tag-pill tag-outline" *ngFor="let author of article.coAuthors">
+      {{ author }}
+    </li>
+  </ul>
   <a (click)="navigateToArticle.emit(article.slug)" class="preview-link">
     <h1 data-e2e-id="article-list-title">{{ article.title }}</h1>
     <p>{{ article.description }}</p>

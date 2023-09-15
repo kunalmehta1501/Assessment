@@ -31,6 +31,12 @@ const structure: Field[] = [
     placeholder: 'Enter Tags',
     validator: [],
   },
+  {
+    type: 'INPUT',
+    name: 'coAuthors',
+    placeholder: 'Enter Co-Authors',
+    validator: [],
+  },
 ];
 
 @UntilDestroy()
@@ -58,7 +64,9 @@ export class ArticleEditComponent implements OnInit, OnDestroy {
   }
 
   updateForm(changes: any) {
-    if(typeof(changes.tagList)=='string') changes.tagList = changes.tagList.split(',').map((x: string)=>x.trim());
+    if (typeof changes.tagList == 'string') changes.tagList = changes.tagList.split(',').map((x: string) => x.trim());
+    if (typeof changes.coAuthors == 'string')
+      changes.coAuthors = changes.coAuthors.split(',').map((x: string) => x.trim());
     this.store.dispatch(formsActions.updateData({ data: changes }));
   }
 
